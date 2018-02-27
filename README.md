@@ -34,17 +34,8 @@ Visit http://localhost:8080 in your browser
 
 ### Solution
 
-Change the port number to 81
-
-Make sure the following modules are installed::
-
-- 'npm install express'
-- 'npm install body-parser'
-- 'npm install helmet'
-- 'npm install ejs'
-- 'npm install istanbul'
-- 'npm install mocha'
-
+Changed the port number to 81
+'http://localhost:81' 
 
 ### Task 1:
 Updates:
