@@ -1,0 +1,25 @@
+{
+  "name": "my-todolist",
+  "version": "0.1.1",
+  "scripts": {
+    "start": "node app.js",
+    "test": "istanbul cover node_modules/mocha/bin/_mocha ./test/*.js",
+    "test:spec": "istanbul cover node_modules/mocha/bin/_mocha ./test/app.spec.js",
+    "test:integration": "istanbul cover node_modules/mocha/bin/_mocha  ./test/app.integration.js"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "chai-http": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "jsdom": "^11.1.0",
+    "mocha": "^3.4.2",
+    "phantom": "^4.0.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "helmet": "^3.11.0"
+  },
+  "description": "My todolist"
+}

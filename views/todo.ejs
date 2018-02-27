@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<!--https://colinmackay.scot/tag/express-ejs-layouts/-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>My todolist</title>
+    <link rel='stylesheet' href='/content/mdl/material.css' />
+    <link rel='stylesheet' href='/content/mdl/mdl-fonts.css' />
+    <link rel='stylesheet' href='/content/mdl/mdl-jquery-modal-dialog.css' />
+    <script src="/content/mdl/jquery-2.2.3.js"></script>
+    <script src="/content/mdl/material.js"></script>
+    <script src="/content/mdl/mdl-jquery-modal-dialog.js"></script>
+</head>
+<body>
+    <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
+    </div>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="android-header mdl-layout__header mdl-layout__header--waterfall">
+            <!-- Top row, always visible -->
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">My todolist</span>
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+                    <div class="logo"></div>
+                </div>
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable" width="100%">
+                <% todolist.forEach(function(todo, index) { %>
+                <form class="edit-todo-form" action="/todo/edit/<%= index %>" method="post">
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric" onclick="javascript:itemEdit('<%= index %>');">
+                        <span id="span-todo-<%= index %>" class="toDovalue <%= index %>_label" ><%= todo %></span><input class="mdl-textfield__input <%= index %>_edit" type="text" name="edittodo" id="edittodo-<%= index %>" value="<%= todo %>" onblur="javascript:itemUpdate('<%= index %>')" style="display:none" />
+                        <input type="submit" id="edit-submit-<%= index %>" value="Update" class="mdl-textfield__input" style="display:none" />
+                    </td>
+                    <td width="20px" class="mdl-data-table__cell--non-numeric" onclick="javascript:itemEdit('<%= index %>');"><a href="#" ><i class="material-icons">edit</i></a></td>
+                    <td width="20px" class="mdl-data-table__cell--non-numeric"><a id="delete-submit-<%= index %>" href="/todo/delete/<%= index %>"><i class="material-icons">delete</i></a></td>
+                </tr>
+                </form>
+                <% }); %>
+                <form class="new-todo-form" action="/todo/add/" method="post">
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric" colspan="2">
+                            <input type="text" class="mdl-textfield__input" name="newtodo" id="newtodo" placeholder="What should I do?" autofocus />
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <button id="new-submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                                <i class="material-icons">add</i>
+                            </button>
+                        </td>
+                    </tr>
+                </form>
+            </table>
+        </main>
+    </div>
+    <script>
+        function itemEdit(id) {
+                    $('.' + id + '_label').hide();
+                    $('.' + id + '_edit').show();
+                    $('.' + id + '_edit').focus();
+                    $('.' + id + '_edit').select();
+        }
+        function itemUpdate(id) {
+                    $('.' + id + '_label').show();
+                    $('.' + id + '_edit').hide();
+                    $('#edit-submit-' + id).trigger('click');
+        }
+    </script>
+</body>
+</html>
